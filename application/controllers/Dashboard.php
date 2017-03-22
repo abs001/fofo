@@ -5,6 +5,11 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('pages/Director');
+		if(isset($_SESSION['admin_id'])){
+			$this->load->view('pages/layout/Director');	
+		}else{
+			$this->session->set_flashdata('msg','Signin to access account');
+			redirect(base_url().'AdminLogin');
+		}
 	}
 }
