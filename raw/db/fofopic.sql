@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2017 at 06:49 AM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Generation Time: Mar 31, 2017 at 05:22 AM
+-- Server version: 5.7.9
+-- PHP Version: 5.6.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `fofopic`
@@ -23,9 +23,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  PRIMARY KEY (`admin_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `username`, `password`, `status`) VALUES
+(0, 'root', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `avatar`
 --
 
+DROP TABLE IF EXISTS `avatar`;
 CREATE TABLE IF NOT EXISTS `avatar` (
   `aid` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) DEFAULT NULL,
@@ -33,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `avatar` (
   PRIMARY KEY (`aid`),
   KEY `apid` (`pid`),
   KEY `auid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -41,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `avatar` (
 -- Table structure for table `friends`
 --
 
+DROP TABLE IF EXISTS `friends`;
 CREATE TABLE IF NOT EXISTS `friends` (
   `fid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) DEFAULT NULL,
@@ -48,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `friends` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`fid`),
   KEY `fuid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -56,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `friends` (
 -- Table structure for table `message`
 --
 
+DROP TABLE IF EXISTS `message`;
 CREATE TABLE IF NOT EXISTS `message` (
   `mid` int(11) NOT NULL AUTO_INCREMENT,
   `message` text COLLATE utf8_unicode_ci,
@@ -63,7 +88,22 @@ CREATE TABLE IF NOT EXISTS `message` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`mid`),
   KEY `muid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notification`
+--
+
+DROP TABLE IF EXISTS `notification`;
+CREATE TABLE IF NOT EXISTS `notification` (
+  `notid` int(10) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `img_path` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `not_date` date DEFAULT NULL,
+  PRIMARY KEY (`notid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -71,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `message` (
 -- Table structure for table `photos`
 --
 
+DROP TABLE IF EXISTS `photos`;
 CREATE TABLE IF NOT EXISTS `photos` (
   `pid` int(11) NOT NULL AUTO_INCREMENT,
   `path` text COLLATE utf8_unicode_ci,
@@ -80,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `photos` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`pid`),
   KEY `puid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -88,6 +129,7 @@ CREATE TABLE IF NOT EXISTS `photos` (
 -- Table structure for table `post`
 --
 
+DROP TABLE IF EXISTS `post`;
 CREATE TABLE IF NOT EXISTS `post` (
   `post_id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) DEFAULT NULL,
@@ -97,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   PRIMARY KEY (`post_id`),
   KEY `ppid` (`pid`),
   KEY `puid1` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -105,6 +147,7 @@ CREATE TABLE IF NOT EXISTS `post` (
 -- Table structure for table `post_comment`
 --
 
+DROP TABLE IF EXISTS `post_comment`;
 CREATE TABLE IF NOT EXISTS `post_comment` (
   `cid` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) DEFAULT NULL,
@@ -114,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `post_comment` (
   PRIMARY KEY (`cid`),
   KEY `cpid` (`pid`),
   KEY `cuid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -122,6 +165,7 @@ CREATE TABLE IF NOT EXISTS `post_comment` (
 -- Table structure for table `post_dislike`
 --
 
+DROP TABLE IF EXISTS `post_dislike`;
 CREATE TABLE IF NOT EXISTS `post_dislike` (
   `did` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) DEFAULT NULL,
@@ -130,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `post_dislike` (
   PRIMARY KEY (`did`),
   KEY `duid` (`uid`),
   KEY `dpid` (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -138,6 +182,7 @@ CREATE TABLE IF NOT EXISTS `post_dislike` (
 -- Table structure for table `post_like`
 --
 
+DROP TABLE IF EXISTS `post_like`;
 CREATE TABLE IF NOT EXISTS `post_like` (
   `lid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) DEFAULT NULL,
@@ -146,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `post_like` (
   PRIMARY KEY (`lid`),
   KEY `luid` (`uid`),
   KEY `lpid` (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -154,6 +199,7 @@ CREATE TABLE IF NOT EXISTS `post_like` (
 -- Table structure for table `post_share`
 --
 
+DROP TABLE IF EXISTS `post_share`;
 CREATE TABLE IF NOT EXISTS `post_share` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) DEFAULT NULL,
@@ -163,7 +209,32 @@ CREATE TABLE IF NOT EXISTS `post_share` (
   PRIMARY KEY (`sid`),
   KEY `spid` (`pid`),
   KEY `suid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prize`
+--
+
+DROP TABLE IF EXISTS `prize`;
+CREATE TABLE IF NOT EXISTS `prize` (
+  `prize_id` int(10) NOT NULL AUTO_INCREMENT,
+  `title` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `week` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `date_added` date DEFAULT NULL,
+  PRIMARY KEY (`prize_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `prize`
+--
+
+INSERT INTO `prize` (`prize_id`, `title`, `image`, `week`, `date_added`) VALUES
+(4, 'Nikon camera ', 'uploads/prize/13_2017.jpg', '13_2017', '2017-03-31'),
+(2, 'Sony vivo laptop', 'uploads/prize/12_2017.jpg', '12_2017', '2017-03-24'),
+(3, 'Fasttrack watch', 'uploads/prize/11_2017.png', '11_2017', '2017-03-16');
 
 -- --------------------------------------------------------
 
@@ -171,6 +242,7 @@ CREATE TABLE IF NOT EXISTS `post_share` (
 -- Table structure for table `theme`
 --
 
+DROP TABLE IF EXISTS `theme`;
 CREATE TABLE IF NOT EXISTS `theme` (
   `tid` int(11) NOT NULL AUTO_INCREMENT,
   `theme_name` text COLLATE utf8_unicode_ci,
@@ -178,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `theme` (
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   PRIMARY KEY (`tid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -186,6 +258,7 @@ CREATE TABLE IF NOT EXISTS `theme` (
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
   `name` text COLLATE utf8_unicode_ci,
@@ -196,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -204,13 +277,14 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Table structure for table `visits`
 --
 
+DROP TABLE IF EXISTS `visits`;
 CREATE TABLE IF NOT EXISTS `visits` (
   `vid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`vid`),
   KEY `vuid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -218,6 +292,7 @@ CREATE TABLE IF NOT EXISTS `visits` (
 -- Table structure for table `weekly_winner`
 --
 
+DROP TABLE IF EXISTS `weekly_winner`;
 CREATE TABLE IF NOT EXISTS `weekly_winner` (
   `wid` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) DEFAULT NULL,
@@ -229,7 +304,7 @@ CREATE TABLE IF NOT EXISTS `weekly_winner` (
   KEY `wpid` (`pid`),
   KEY `wuid` (`uid`),
   KEY `wtid` (`tid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Constraints for dumped tables

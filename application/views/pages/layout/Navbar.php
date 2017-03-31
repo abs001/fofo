@@ -5,11 +5,7 @@
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-              <?php if(isset($_SESSION['msg'])){?>
-              <div class="alert alert-success" id="alertbox">
-                <?php echo $_SESSION['msg']; ?>
-              </div>
-              <?php }?>
+              
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
